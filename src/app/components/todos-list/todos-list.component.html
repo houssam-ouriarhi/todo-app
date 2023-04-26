@@ -1,0 +1,17 @@
+<p *ngIf="isLoading">Loading...</p>
+
+<div [class]="'alert alert-' + alertColor" role="alert" *ngIf="alertShown">
+  {{ alertMsg }}
+  <button type="button" class="btn" (click)="hideAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="list-group">
+  <app-task-item
+    *ngFor="let task of tasks"
+    [task]="task"
+    (editClick)="editClicked($event)"
+    (deleteClick)="deleteClicked($event)"
+  ></app-task-item>
+</div>

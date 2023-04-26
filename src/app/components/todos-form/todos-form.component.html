@@ -1,0 +1,29 @@
+<form [formGroup]="todosFormGroup" (ngSubmit)="submitForm()">
+  <div class="form-group">
+    <label for="label">Label</label>
+    <input
+      type="text"
+      formControlName="label"
+      class="form-control"
+      id="label"
+      placeholder="Label"
+      [(ngModel)]="taskToAdd.label"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      formControlName="description"
+      class="form-control"
+      id="description"
+      placeholder="Description"
+      [(ngModel)]="taskToAdd.description"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,23 @@
+<div
+  href="#"
+  class="list-group-item list-group-item-action flex-column align-items-start"
+>
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">{{ task?.label }}</h5>
+    <small>
+      <span
+        (click)="notifyEdit(task)"
+        class="badge-btn badge bg-primary badge-pill"
+        >Edit</span
+      >
+      <span
+        (click)="notifyDelete(task)"
+        class="badge-btn badge bg-danger badge-pill"
+        >Delete</span
+      >
+    </small>
+  </div>
+
+  <p class="mb-1">{{ task?.description }}</p>
+  <small>{{ task?.id }}</small>
+</div>
