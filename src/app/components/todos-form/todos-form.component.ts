@@ -20,24 +20,38 @@ export class TodosFormComponent {
   public taskToAdd: TodoTask = { id: "", label: "", description: "" };
   public isLoading: boolean = false;
 
-  constructor(private todoTaskService: TodoTaskService) {
-    console.log("hi ctor");
-    console.log(this.taskToEdit);
+  constructor(private todoTaskService: TodoTaskService) {}
+  ngOnChanges(change: TodoTask) {
+    if ("taskToEdit" in change) {
+      if (this.taskToEdit) {
+        this.taskToAdd = this.taskToEdit;
+      }
+      console.log(this.taskToEdit);
+    }
   }
-  ngOnInit(): void {
-    console.log("hi");
-    console.log(this.taskToEdit);
-  }
+  ngOnInit(): void {}
   submitForm() {
     this.isLoading = true;
 
     if (this.todosFormGroup.valid) {
-      this.sub$ = this.todoTaskService
-        .addOne(this.taskToAdd)
-        .subscribe((data) => {
-          this.isLoading = false;
-          this.todosFormGroup.reset();
-        });
+      if (this.taskToEdit) {
+        // edite task
+
+        this.sub$ = this.todoTaskService
+          .update(this.taskToEdit.id, this.taskToEdit)
+          .subscribe((data) => {
+            this.isLoading = false;
+            this.todosFormGroup.reset();
+          });
+      } else {
+        // add task
+        this.sub$ = this.todoTaskService
+          .addOne(this.taskToAdd)
+          .subscribe((data) => {
+            this.isLoading = false;
+            this.todosFormGroup.reset();
+          });
+      }
     }
   }
 
