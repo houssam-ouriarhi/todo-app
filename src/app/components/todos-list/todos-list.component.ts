@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TodoTask } from 'src/app/models/todo-task';
-import { TodoTaskService } from 'src/app/services/todo-task.service';
+import { Component, EventEmitter, Output } from "@angular/core";
+import { Subscription } from "rxjs";
+import { TodoTask } from "src/app/models/todo-task";
+import { TodoTaskService } from "src/app/services/todo-task.service";
 
 @Component({
-  selector: 'app-todos-list',
-  templateUrl: './todos-list.component.html',
+  selector: "app-todos-list",
+  templateUrl: "./todos-list.component.html",
 })
 export class TodosListComponent {
+  @Output() editDetails: EventEmitter<TodoTask> = new EventEmitter();
+
   public sub$: Subscription | undefined;
   public tasks: TodoTask[] = [];
   public isLoading: boolean = true;
 
   // alert prop
   public alertShown: boolean = false;
-  public alertMsg: string = '';
-  public alertColor: string = '';
+  public alertMsg: string = "";
+  public alertColor: string = "";
 
   constructor(private todoTaskService: TodoTaskService) {}
 
@@ -27,13 +29,13 @@ export class TodosListComponent {
   }
 
   editClicked(emited: TodoTask) {
-    console.log(emited);
+    this.editDetails.emit(emited);
   }
 
   deleteClicked(emited: TodoTask) {
     this.isLoading = true;
     this.sub$ = this.todoTaskService.delete(emited.id).subscribe((data) => {
-      this.notify('Task deleted successfully!', 'danger');
+      this.notify("Task deleted successfully!", "danger");
       this.ngOnInit();
     });
   }

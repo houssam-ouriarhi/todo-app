@@ -2,9 +2,9 @@
   <h1>My App</h1>
 
   <!-- display all tasks -->
-  <app-todos-list></app-todos-list>
+  <app-todos-list (editDetails)="reciveEditDetails($event)"> </app-todos-list>
 
   <hr />
   <!-- add todo -->
-  <app-todos-form></app-todos-form>
+  <app-todos-form [taskToEdit]="recivedTodoTask"></app-todos-form>
 </div>
