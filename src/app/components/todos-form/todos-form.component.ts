@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, SimpleChange } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { TodoTask } from "src/app/models/todo-task";
@@ -21,7 +21,7 @@ export class TodosFormComponent {
   public isLoading: boolean = false;
 
   constructor(private todoTaskService: TodoTaskService) {}
-  ngOnChanges(change: TodoTask) {
+  ngOnChanges(change: SimpleChange) {
     if ("taskToEdit" in change) {
       if (this.taskToEdit) {
         this.taskToAdd = this.taskToEdit;

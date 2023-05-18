@@ -7,7 +7,9 @@ import { TodoTask } from "./models/todo-task";
 })
 export class AppComponent {
   @Output() public recivedTodoTask: TodoTask | undefined;
+
   constructor() {}
+
   reciveEditDetails(detailTaskToEdit: TodoTask) {
     this.recivedTodoTask = detailTaskToEdit;
   }
